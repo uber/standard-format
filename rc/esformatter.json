@@ -1,6 +1,6 @@
 {
   "indent" : {
-    "value": "  "
+    "value": "    "
   },
 
   "lineBreak" : {
@@ -218,7 +218,7 @@
       "ForStatementOpeningBrace" : -1,
       "ForStatementSemicolon" : -1,
       "FunctionReservedWord": 1,
-      "FunctionName" : 1,
+      "FunctionName" : 0,
       "FunctionExpressionOpeningBrace" : -1,
       "FunctionExpressionClosingBrace" : -1,
       "FunctionDeclarationOpeningBrace" : -1,
@@ -254,6 +254,12 @@
   },
 
   "plugins": [
+    "esformatter-parseint",
+    "esformatter-var-each",
+    "esformatter-eol-last",
+    "esformatter-use-strict",
+    "esformatter-shebang-ignore",
+    "esformatter-remove-trailing-commas",
     "esformatter-quotes",
     "esformatter-literal-notation",
     "esformatter-spaced-lined-comment"
@@ -261,6 +267,6 @@
 
   "quotes": {
     "type": "single",
-    "avoidEscape": true
+    "avoidEscape": false
   }
 }

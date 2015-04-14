@@ -1,17 +1,17 @@
 
 # standard-format
 
-  [![Build Status](https://travis-ci.org/maxogden/standard-format.svg)](https://travis-ci.org/maxogden/standard-format)
+  [![Build Status](https://travis-ci.org/uber/standard-format.svg)](https://travis-ci.org/uber/standard-format)
 
-  **experimental** auto formatter for the easier cases in [standard](https://www.npmjs.com/package/standard)
+  **experimental** auto formatter for the easier cases in [uber-standard](https://www.npmjs.com/package/uber-standard)
 
-  [![NPM](https://nodei.co/npm/standard-format.png)](https://nodei.co/npm/standard-format/)
+  [![NPM](https://nodei.co/npm/uber-standard-format.png)](https://nodei.co/npm/uber-standard-format/)
 
 ## Installation
 
   Install with npm
 
-    $ npm install -g standard-format
+    $ npm install -g uber-standard-format
 
 ## Example Usage
 
@@ -30,3 +30,7 @@
   Format and overwrite specific files
 
     $ standard-format -w file1.js file2.js
+
+# Credits
+
+This is a fork of [maxogden/standard-format](https://github.com/maxogden/standard-format)
