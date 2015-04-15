@@ -5,14 +5,14 @@ var noops = [
   { str: 'if (!opts) opts = {}\n',
     msg: 'noop on single line conditional assignment' },
 
-  { str: 'var g = { name: f, data: fs.readFileSync(f).toString() }\n',
+  { str: 'var g = { name: f, data: fs.readFileSync(f).toString() }\n\n',
     msg: 'noop on single line object assignment'
   },
   {
     str: '{foo: \'bar\'}\n',
     msg: 'Dont add padding to object braces'
   },
-  { str: "var x = ['test.js', '**test/failing/**']\n",
+  { str: "var x = ['test.js', '**test/failing/**']\n\n",
     msg: 'Noop on singleline arrays'
   }
 ]
@@ -20,34 +20,34 @@ var noops = [
 test('singleline noop expressions', function (t) {
   t.plan(noops.length)
   noops.forEach(function (obj) {
-    t.equal(fmt(obj.str), obj.str, obj.msg)
+    t.equal(fmt(obj.str).substring(15), obj.str, obj.msg)
   })
 })
 
 var transforms = [
   {
     str: 'var x = function() {}\n',
-    expect: 'var x = function () {}\n',
+    expect: 'var x = function () {}\n\n',
     msg: 'Anonomous function spacing between keyword and arguments'
   },
   {
     str: 'var     hi =    1\n',
-    expect: 'var hi = 1\n',
+    expect: 'var hi = 1\n\n',
     msg: 'Squash spaces around variable value'
   },
   {
     str: 'var hi           = 1\n',
-    expect: 'var hi = 1\n',
+    expect: 'var hi = 1\n\n',
     msg: 'Space after variable name'
   },
   {
     str: 'var hi\n hi =    1\n',
-    expect: 'var hi\nhi = 1\n',
+    expect: 'var hi\n\nhi = 1\n',
     msg: 'Squash spaces around assignment operator'
   },
   {
     str: 'function foo (x,y,z) {}\n',
-    expect: 'function foo (x, y, z) {}\n',
+    expect: 'function foo(x, y, z) {}\n',
     msg: 'Space after commas in function parameters'
   },
   {
@@ -60,6 +60,6 @@ var transforms = [
 test('singleline transforms', function (t) {
   t.plan(transforms.length)
   transforms.forEach(function (obj) {
-    t.equal(fmt(obj.str), obj.expect, obj.msg)
+    t.equal(fmt(obj.str).substring(15), obj.expect, obj.msg)
   })
 })

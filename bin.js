@@ -76,7 +76,7 @@ function getFiles (done) {
 getFiles(function (err, files) {
   if (err) return error(err)
   var root = (files[0] && files[0].name === 'stdin') ?
-    process.cwd() : commondir(files);
+    process.cwd() : commondir(files)
   editorConfigGetIndent(root, function (err, indent) {
     if (err) return error(err)
     files.forEach(function (file) {

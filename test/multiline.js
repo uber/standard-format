@@ -39,7 +39,7 @@ var collapse = [
 
     expected:
     'var foo = function () {\n' +
-    '  bar()\n' +
+    '    bar()\n' +
     '}\n',
     msg: 'Remove padding newlines after curly braces'
   }
@@ -48,7 +48,7 @@ var collapse = [
 test('multiline collapse', function (t) {
   t.plan(collapse.length)
   collapse.forEach(function (obj) {
-    t.equal(fmt(obj.program), obj.expected, obj.msg)
+    t.equal(fmt(obj.program).substring(15), obj.expected + '\n', obj.msg)
   })
 })
 
@@ -57,20 +57,21 @@ var noops = [
     program:
     'var x = 1\n' +
     '\n' +
-    'var z = 2\n',
+    'var z = 2\n' +
+    '\n',
 
     msg: 'single empty line should be unmodified'
   },
   {
     program:
-    'function getRequests (cb) {\n' +
-    '  nets({\n' +
-    "    url: binUrl + '/api/v1/bins/' + bin.name + '/requests',\n" +
-    '    json: true,\n' +
-    '    headers: headers\n' +
-    '  }, function (err, resp, body) {\n' +
-    '    cb(err, resp, body)\n' +
-    '  })\n' +
+    'function getRequests(cb) {\n' +
+    '    nets({\n' +
+    "        url: binUrl + '/api/v1/bins/' + bin.name + '/requests',\n" +
+    '        json: true,\n' +
+    '        headers: headers\n' +
+    '    }, function (err, resp, body) {\n' +
+    '        cb(err, resp, body)\n' +
+    '    })\n' +
     '}\n',
 
     msg: 'Dont mess with function tabbing'
@@ -79,10 +80,11 @@ var noops = [
   {
     program:
     'var obj = {\n' +
-    "  'standard': {\n" +
-    "    'ignore': ['test.js', '**test/failing/**']\n" +
-    '  }\n' +
-    '}\n',
+    "    'standard': {\n" +
+    "        'ignore': ['test.js', '**test/failing/**']\n" +
+    '    }\n' +
+    '}\n' +
+    '\n',
 
     msg: 'allow single line object arrays'
   }
@@ -91,6 +93,6 @@ var noops = [
 test('multiline noop', function (t) {
   t.plan(noops.length)
   noops.forEach(function (obj) {
-    t.equal(fmt(obj.program), obj.program, obj.msg)
+    t.equal(fmt(obj.program).substring(15), obj.program, obj.msg)
   })
 })

@@ -22,8 +22,9 @@ module.exports.transform = function (file, indent) {
   file = file
     .replace(MULTI_NEWLINE, EOL + EOL)
 
-  ESFORMATTER_CONFIG.indent.value = Array((indent || 4) + 1).join(' ');
+  ESFORMATTER_CONFIG.indent.value = Array((indent || 4) + 1).join(' ')
   var formatted = formatter.format(file, ESFORMATTER_CONFIG)
+    .replace(MULTI_NEWLINE, EOL + EOL)
     .replace(SOF_NEWLINES, '')
 
   return formatted
