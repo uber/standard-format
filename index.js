@@ -18,10 +18,11 @@ var MULTI_NEWLINE = /((?:\r?\n){3,})/g
 var SOF_NEWLINES = /^(\r?\n)+/g
 var EOL = os.EOL
 
-module.exports.transform = function (file) {
+module.exports.transform = function (file, indent) {
   file = file
     .replace(MULTI_NEWLINE, EOL + EOL)
 
+  ESFORMATTER_CONFIG.indent.value = Array((indent || 4) + 1).join(' ');
   var formatted = formatter.format(file, ESFORMATTER_CONFIG)
     .replace(SOF_NEWLINES, '')
 

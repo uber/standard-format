@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/uber/standard-format",
   "dependencies": {
+    "commondir": "^1.0.1",
+    "editorconfig-get-indent": "^1.0.0",
     "esformatter": "^0.6.0",
     "esformatter-eol-last": "^1.0.0",
     "esformatter-literal-notation": "^1.0.0",
