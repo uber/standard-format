@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var commondir = require('commondir')
+var editorConfigGetIndent = require('editorconfig-get-indent')
 var fmt = require('./')
 var fs = require('fs')
 var stdin = require('stdin')
@@ -73,9 +75,14 @@ function getFiles (done) {
 
 getFiles(function (err, files) {
   if (err) return error(err)
-  files.forEach(function (file) {
-    file.data = fmt.transform(file.data)
-    processFile(file)
+  var root = (files[0] && files[0].name === 'stdin') ?
+    process.cwd() : commondir(files)
+  editorConfigGetIndent(root, function (err, indent) {
+    if (err) return error(err)
+    files.forEach(function (file) {
+      file.data = fmt.transform(file.data, indent)
+      processFile(file)
+    })
   })
 })
 
