@@ -73,16 +73,25 @@ function getFiles (done) {
   }
 }
 
+function getRoot(files) {
+  if (files[0] && files[0].name === 'stdin') {
+      return process.cwd();
+  }
+  var fileNames = files.map(function getName(file) {
+      return file.name;
+  });
+  return commondir('./', fileNames);
+}
+
 getFiles(function (err, files) {
   if (err) return error(err)
-  var root = (files[0] && files[0].name === 'stdin') ?
-    process.cwd() : commondir(files)
+  var root = getRoot(files);
   editorConfigGetIndent(root, function (err, indent) {
-    if (err) return error(err)
-    files.forEach(function (file) {
-      file.data = fmt.transform(file.data, indent)
-      processFile(file)
-    })
+      if (err) return error(err)
+      files.forEach(function (file) {
+          file.data = fmt.transform(file.data, indent)
+          processFile(file)
+      })
   })
 })
 
